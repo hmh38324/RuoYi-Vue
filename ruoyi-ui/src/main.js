@@ -9,8 +9,8 @@ import '@/assets/styles/index.scss' // global css
 import '@/assets/styles/ruoyi.scss' // ruoyi css
 import App from './App'
 import store from './store'
-import router from './router'
-import directive from './directive' // directive
+import router from './router' //(值可以默认识别./router下的index.*文件 其他文件不能导入)
+import directive from './directive' // directive 
 import plugins from './plugins' // plugins
 import { download } from '@/utils/request'
 
@@ -38,7 +38,7 @@ import VueMeta from 'vue-meta'
 // 字典数据组件
 import DictData from '@/components/DictData'
 
-// 全局方法挂载
+// 全局方法挂载  (全局方法只需要this.**就可以直接用)
 Vue.prototype.getDicts = getDicts
 Vue.prototype.getConfigKey = getConfigKey
 Vue.prototype.parseTime = parseTime
@@ -73,7 +73,7 @@ DictData.install()
  */
 
 Vue.use(Element, {
-  size: Cookies.get('size') || 'medium' // set element-ui default size
+  size: Cookies.get('size') || 'medium' // set element-ui default size(可以动态获取前端页面布局的大小设置,来改变elm的图标大小)
 })
 
 Vue.config.productionTip = false

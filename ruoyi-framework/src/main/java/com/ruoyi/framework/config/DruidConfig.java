@@ -40,7 +40,7 @@ public class DruidConfig
         return druidProperties.dataSource(dataSource);
     }
 
-    @Bean
+    @Bean//如果有多个从数据源要重新注册一个Bean,同时需要添加在从数据源的map中
     @ConfigurationProperties("spring.datasource.druid.slave")
     @ConditionalOnProperty(prefix = "spring.datasource.druid.slave", name = "enabled", havingValue = "true")
     public DataSource slaveDataSource(DruidProperties druidProperties)
@@ -56,6 +56,7 @@ public class DruidConfig
         Map<Object, Object> targetDataSources = new HashMap<>();
         targetDataSources.put(DataSourceType.MASTER.name(), masterDataSource);
         setDataSource(targetDataSources, DataSourceType.SLAVE.name(), "slaveDataSource");
+        //setDataSource(targetDataSources, DataSourceType.SLAVE2.name(), "slaveDataSource2");
         return new DynamicDataSource(masterDataSource, targetDataSources);
     }
     

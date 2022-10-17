@@ -115,7 +115,7 @@ public class SysUserController extends BaseController
     /**
      * 新增用户
      */
-    @PreAuthorize("@ss.hasPermi('system:user:add')")
+    @PreAuthorize("@ss.hasPermi('system:user:add')")//进入方法前的权限验证 只有当前user具有**权限才可以执行此方法!!
     @Log(title = "用户管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@Validated @RequestBody SysUser user)

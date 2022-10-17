@@ -27,7 +27,7 @@ public class ResourcesConfig implements WebMvcConfigurer
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry)
     {
-        /** 本地文件上传路径 */
+        /** 本地文件上传路径 （将访问服务器、profile/**的文件映射到本地的文件）*/
         registry.addResourceHandler(Constants.RESOURCE_PREFIX + "/**")
                 .addResourceLocations("file:" + RuoYiConfig.getProfile() + "/");
 

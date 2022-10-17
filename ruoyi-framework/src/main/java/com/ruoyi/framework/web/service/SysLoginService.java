@@ -70,7 +70,8 @@ public class SysLoginService
         Authentication authentication = null;
         try
         {
-            // 该方法会去调用UserDetailsServiceImpl.loadUserByUsername
+            //先验证用户名是否存在， 然后再验证密码是否匹配
+            // 该方法会去调用UserDetailsServiceImpl.loadUserByUsername    retrieveUser方法
             authentication = authenticationManager
                     .authenticate(new UsernamePasswordAuthenticationToken(username, password));
         }
@@ -99,7 +100,7 @@ public class SysLoginService
      * 
      * @param username 用户名
      * @param code 验证码
-     * @param uuid 唯一标识
+     * @param uuid 唯一标识 (获取验证码的时候将uuid存入redis)
      * @return 结果
      */
     public void validateCaptcha(String username, String code, String uuid)

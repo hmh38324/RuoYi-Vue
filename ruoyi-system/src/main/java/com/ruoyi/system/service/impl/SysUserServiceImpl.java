@@ -68,7 +68,7 @@ public class SysUserServiceImpl implements ISysUserService
      * @return 用户信息集合信息
      */
     @Override
-    @DataScope(deptAlias = "d", userAlias = "u")
+    @DataScope(deptAlias = "d", userAlias = "u") //(根据sysuer继承的基类中的dataScope字段来拼接sql语句实现数据权限过滤)
     public List<SysUser> selectUserList(SysUser user)
     {
         return userMapper.selectUserList(user);

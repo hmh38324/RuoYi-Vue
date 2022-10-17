@@ -22,7 +22,7 @@ import com.ruoyi.framework.web.service.TokenService;
  * @author ruoyi
  */
 @Component
-public class JwtAuthenticationTokenFilter extends OncePerRequestFilter
+public class JwtAuthenticationTokenFilter extends OncePerRequestFilter //一次请求只会通过一次
 {
     @Autowired
     private TokenService tokenService;
@@ -34,11 +34,14 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter
         LoginUser loginUser = tokenService.getLoginUser(request);
         if (StringUtils.isNotNull(loginUser) && StringUtils.isNull(SecurityUtils.getAuthentication()))
         {
+            //保持令牌有效性,刷新令牌有效期
             tokenService.verifyToken(loginUser);
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginUser, null, loginUser.getAuthorities());
             authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+            //添加认证信息
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         }
+
         chain.doFilter(request, response);
     }
 }

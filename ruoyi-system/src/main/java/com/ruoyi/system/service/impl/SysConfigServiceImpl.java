@@ -23,6 +23,7 @@ import com.ruoyi.system.service.ISysConfigService;
  * @author ruoyi
  */
 @Service
+//@DataSource(DataSourceType.SLAVE2)  //数据源的设置也可以加到类上,此类下的所有方法都会用指定的数据源(不用每个方法都去加注解)
 public class SysConfigServiceImpl implements ISysConfigService
 {
     @Autowired
@@ -47,7 +48,7 @@ public class SysConfigServiceImpl implements ISysConfigService
      * @return 参数配置信息
      */
     @Override
-    @DataSource(DataSourceType.MASTER)
+    @DataSource(DataSourceType.MASTER)//可以指定数据源来访问主从数据库,,
     public SysConfig selectConfigById(Long configId)
     {
         SysConfig config = new SysConfig();

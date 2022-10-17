@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.choose.mapper.SysTeacherMapper">
+    
+    <resultMap type="SysTeacher" id="SysTeacherResult">
+        <result property="teacherId"    column="teacher_id"    />
+        <result property="teacherName"    column="teacher_name"    />
+        <result property="teacherPlan"    column="teacher_plan"    />
+        <result property="teacherChosen"    column="teacher_chosen"    />
+        <result property="teacherIntroduce"    column="teacher_introduce"    />
+        <result property="teacherRemain"    column="teacher_remain"    />
+    </resultMap>
+
+    <sql id="selectSysTeacherVo">
+        select teacher_id, teacher_name, teacher_plan, teacher_chosen, teacher_introduce, teacher_remain from sys_teacher
+    </sql>
+
+    <select id="selectSysTeacherList" parameterType="SysTeacher" resultMap="SysTeacherResult">
+        <include refid="selectSysTeacherVo"/>
+        <where>  
+            <if test="teacherName != null  and teacherName != ''"> and teacher_name like concat('%', #{teacherName}, '%')</if>
+            <if test="teacherPlan != null "> and teacher_plan = #{teacherPlan}</if>
+            <if test="teacherChosen != null  and teacherChosen != ''"> and teacher_chosen = #{teacherChosen}</if>
+            <if test="teacherIntroduce != null  and teacherIntroduce != ''"> and teacher_introduce = #{teacherIntroduce}</if>
+            <if test="teacherRemain != null "> and teacher_remain = #{teacherRemain}</if>
+        </where>
+    </select>
+    
+    <select id="selectSysTeacherByTeacherId" parameterType="Long" resultMap="SysTeacherResult">
+        <include refid="selectSysTeacherVo"/>
+        where teacher_id = #{teacherId}
+    </select>
+        
+    <insert id="insertSysTeacher" parameterType="SysTeacher">
+        insert into sys_teacher
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="teacherId != null">teacher_id,</if>
+            <if test="teacherName != null">teacher_name,</if>
+            <if test="teacherPlan != null">teacher_plan,</if>
+            <if test="teacherChosen != null">teacher_chosen,</if>
+            <if test="teacherIntroduce != null">teacher_introduce,</if>
+            <if test="teacherRemain != null">teacher_remain,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="teacherId != null">#{teacherId},</if>
+            <if test="teacherName != null">#{teacherName},</if>
+            <if test="teacherPlan != null">#{teacherPlan},</if>
+            <if test="teacherChosen != null">#{teacherChosen},</if>
+            <if test="teacherIntroduce != null">#{teacherIntroduce},</if>
+            <if test="teacherRemain != null">#{teacherRemain},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysTeacher" parameterType="SysTeacher">
+        update sys_teacher
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="teacherName != null">teacher_name = #{teacherName},</if>
+            <if test="teacherPlan != null">teacher_plan = #{teacherPlan},</if>
+            <if test="teacherChosen != null">teacher_chosen = #{teacherChosen},</if>
+            <if test="teacherIntroduce != null">teacher_introduce = #{teacherIntroduce},</if>
+            <if test="teacherRemain != null">teacher_remain = #{teacherRemain},</if>
+        </trim>
+        where teacher_id = #{teacherId}
+    </update>
+
+    <delete id="deleteSysTeacherByTeacherId" parameterType="Long">
+        delete from sys_teacher where teacher_id = #{teacherId}
+    </delete>
+
+    <delete id="deleteSysTeacherByTeacherIds" parameterType="String">
+        delete from sys_teacher where teacher_id in 
+        <foreach item="teacherId" collection="array" open="(" separator="," close=")">
+            #{teacherId}
+        </foreach>
+    </delete>
+</mapper>

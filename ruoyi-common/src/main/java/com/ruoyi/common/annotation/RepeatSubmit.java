@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
  * @author ruoyi
  *
  */
-@Inherited
+@Inherited //如果父类使用了带有@Inherited的注解,那么该类的子类也会继承带有@Inherited的注解(这里指@RepeatSubmit)
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented

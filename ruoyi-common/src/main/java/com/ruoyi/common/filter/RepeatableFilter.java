@@ -12,7 +12,7 @@ import org.springframework.http.MediaType;
 import com.ruoyi.common.utils.StringUtils;
 
 /**
- * Repeatable 过滤器
+ * Repeatable 过滤器 (获取可重复读取的request流)
  * 
  * @author ruoyi
  */
@@ -29,9 +29,11 @@ public class RepeatableFilter implements Filter
             throws IOException, ServletException
     {
         ServletRequest requestWrapper = null;
+        //是不是json请求
         if (request instanceof HttpServletRequest
                 && StringUtils.startsWithIgnoreCase(request.getContentType(), MediaType.APPLICATION_JSON_VALUE))
         {
+            //(获取可重复读取的request流)
             requestWrapper = new RepeatedlyRequestWrapper((HttpServletRequest) request, response);
         }
         if (null == requestWrapper)

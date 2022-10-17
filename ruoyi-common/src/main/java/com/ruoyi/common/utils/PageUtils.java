@@ -17,6 +17,7 @@ public class PageUtils extends PageHelper
      */
     public static void startPage()
     {
+        //list都是get请求，通过ServletUtils.getParameter(PAGE_NUM)来获取页码和大小
         PageDomain pageDomain = TableSupport.buildPageRequest();
         Integer pageNum = pageDomain.getPageNum();
         Integer pageSize = pageDomain.getPageSize();

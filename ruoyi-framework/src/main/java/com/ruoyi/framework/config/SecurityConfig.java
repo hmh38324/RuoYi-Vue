@@ -25,8 +25,8 @@ import com.ruoyi.framework.security.handle.LogoutSuccessHandlerImpl;
  * 
  * @author ruoyi
  */
-@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
-public class SecurityConfig extends WebSecurityConfigurerAdapter
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)//要想使用@PreAuthorize注解,需要开启prePostEnabled = true
+public class  SecurityConfig extends WebSecurityConfigurerAdapter
 {
     /**
      * 自定义用户认证逻辑

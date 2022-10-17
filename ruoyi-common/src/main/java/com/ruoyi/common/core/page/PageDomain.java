@@ -30,6 +30,7 @@ public class PageDomain
         {
             return "";
         }
+        //驼峰转下划线
         return StringUtils.toUnderScoreCase(orderByColumn) + " " + isAsc;
     }
 

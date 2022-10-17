@@ -86,7 +86,7 @@ public class SysJob extends BaseEntity
         this.jobGroup = jobGroup;
     }
 
-    @NotBlank(message = "调用目标字符串不能为空")
+    @NotBlank(message = "调用目标字符串不能为空,Bean调用示例：ryTask.ryParams('ry')")
     @Size(min = 0, max = 500, message = "调用目标字符串长度不能超过500个字符")
     public String getInvokeTarget()
     {

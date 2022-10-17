@@ -10,7 +10,7 @@ import com.ruoyi.quartz.domain.SysJob;
  * @author ruoyi
  *
  */
-@DisallowConcurrentExecution
+@DisallowConcurrentExecution    //禁用并发
 public class QuartzDisallowConcurrentExecution extends AbstractQuartzJob
 {
     @Override

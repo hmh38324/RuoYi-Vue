@@ -114,7 +114,7 @@ public class MyBatisConfig
     }
 
     @Bean
-    public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception
+    public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception//config中加的mybatis配置,也需要加到这里,不然不生效
     {
         String typeAliasesPackage = env.getProperty("mybatis.typeAliasesPackage");
         String mapperLocations = env.getProperty("mybatis.mapperLocations");

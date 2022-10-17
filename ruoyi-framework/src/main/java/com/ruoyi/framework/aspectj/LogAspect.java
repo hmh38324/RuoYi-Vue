@@ -93,7 +93,7 @@ public class LogAspect
             operLog.setRequestMethod(ServletUtils.getRequest().getMethod());
             // 处理设置注解上的参数
             getControllerMethodDescription(joinPoint, controllerLog, operLog, jsonResult);
-            // 保存数据库
+            // 保存数据库(异步的方式保存操作日志)
             AsyncManager.me().execute(AsyncFactory.recordOper(operLog));
         }
         catch (Exception exp)
@@ -184,7 +184,7 @@ public class LogAspect
      * 判断是否需要过滤的对象。
      * 
      * @param o 对象信息。
-     * @return 如果是需要过滤的对象，则返回true；否则返回false。
+     * @return 如果是需要过滤的对象，则返回true；否则返回false。过滤掉文件 request response等
      */
     @SuppressWarnings("rawtypes")
     public boolean isFilterObject(final Object o)

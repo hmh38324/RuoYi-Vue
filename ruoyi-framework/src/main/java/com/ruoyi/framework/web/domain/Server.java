@@ -128,6 +128,7 @@ public class Server
     {
         // CPU信息
         long[] prevTicks = processor.getSystemCpuLoadTicks();
+        //插件的问题,需要等一秒来获取信息,否则可能报空指针
         Util.sleep(OSHI_WAIT_SECOND);
         long[] ticks = processor.getSystemCpuLoadTicks();
         long nice = ticks[TickType.NICE.getIndex()] - prevTicks[TickType.NICE.getIndex()];

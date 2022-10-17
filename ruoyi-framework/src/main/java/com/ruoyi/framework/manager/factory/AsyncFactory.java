@@ -38,6 +38,7 @@ public class AsyncFactory
             final Object... args)
     {
         final UserAgent userAgent = UserAgent.parseUserAgentString(ServletUtils.getRequest().getHeader("User-Agent"));
+        //ip要放到线程的外边,防止混乱,且要用final限定
         final String ip = IpUtils.getIpAddr(ServletUtils.getRequest());
         return new TimerTask()
         {

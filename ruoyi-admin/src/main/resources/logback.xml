@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <!-- 日志存放路径 -->
+    <!-- 日志存放路径 如果是windows 表示当前磁盘根如 C:/home/ruoyi/logs -->
 	<property name="log.path" value="/home/ruoyi/logs" />
     <!-- 日志输出格式 -->
 	<property name="log.pattern" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{20} - [%method,%line] - %msg%n" />
@@ -24,6 +24,7 @@
 		</rollingPolicy>
 		<encoder>
 			<pattern>${log.pattern}</pattern>
+            <charset>UTF-8</charset>
 		</encoder>
 		<filter class="ch.qos.logback.classic.filter.LevelFilter">
             <!-- 过滤的级别 -->
@@ -46,6 +47,7 @@
         </rollingPolicy>
         <encoder>
             <pattern>${log.pattern}</pattern>
+            <charset>UTF-8</charset>
         </encoder>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <!-- 过滤的级别 -->
@@ -68,6 +70,7 @@
         </rollingPolicy>
         <encoder>
             <pattern>${log.pattern}</pattern>
+            <charset>UTF-8</charset>
         </encoder>
     </appender>
 	
@@ -80,7 +83,7 @@
 		<appender-ref ref="console" />
 	</root>
 	
-	<!--系统操作日志-->
+	<!--系统操作日志  (配置优先)-->
     <root level="info">
         <appender-ref ref="file_info" />
         <appender-ref ref="file_error" />

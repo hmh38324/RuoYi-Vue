@@ -41,6 +41,7 @@ public class TableSupport
     public static PageDomain getPageDomain()
     {
         PageDomain pageDomain = new PageDomain();
+        //优先获取前端传过来的值,如果没有就用默认值
         pageDomain.setPageNum(Convert.toInt(ServletUtils.getParameter(PAGE_NUM), 1));
         pageDomain.setPageSize(Convert.toInt(ServletUtils.getParameter(PAGE_SIZE), 10));
         pageDomain.setOrderByColumn(ServletUtils.getParameter(ORDER_BY_COLUMN));

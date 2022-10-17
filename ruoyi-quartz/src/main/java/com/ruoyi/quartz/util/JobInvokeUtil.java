@@ -22,6 +22,8 @@ public class JobInvokeUtil
      */
     public static void invokeMethod(SysJob sysJob) throws Exception
     {
+        //Bean调用示例：ryTask.ryParams('ry')
+        //Class类调用示例：com.ruoyi.quartz.task.RyTask.ryParams('ry')
         String invokeTarget = sysJob.getInvokeTarget();
         String beanName = getBeanName(invokeTarget);
         String methodName = getMethodName(invokeTarget);
@@ -29,11 +31,13 @@ public class JobInvokeUtil
 
         if (!isValidClassName(beanName))
         {
+            //Bean调用方式
             Object bean = SpringUtils.getBean(beanName);
             invokeMethod(bean, methodName, methodParams);
         }
         else
         {
+            //Class调用方式
             Object bean = Class.forName(beanName).newInstance();
             invokeMethod(bean, methodName, methodParams);
         }

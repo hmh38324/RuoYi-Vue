@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <router-view />
+    <!-- (根据path中的字段(请求url)寻找对应的views) -->
+    <router-view /> 
   </div>
 </template>
 

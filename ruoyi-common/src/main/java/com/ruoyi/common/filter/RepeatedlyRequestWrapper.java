@@ -14,6 +14,7 @@ import com.ruoyi.common.constant.Constants;
 
 /**
  * 构建可重复读取inputStream的request
+ * (因为拦截器需要读取流,而@RequestBody也会读取流,而流只能被读取一次,所以需要构建可重复读取的流)
  * 
  * @author ruoyi
  */

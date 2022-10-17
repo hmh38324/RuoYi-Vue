@@ -2,14 +2,17 @@
 spring:
     datasource:
         type: com.alibaba.druid.pool.DruidDataSource
+        # 如果是不同数据库需要把driverClassName删掉,让程序自己寻找合适的驱动  (配置不同数据源还需要解决PageHelper的配置)
         driverClassName: com.mysql.cj.jdbc.Driver
         druid:
             # 主库数据源
             master:
-                url: jdbc:mysql://localhost:3306/ry-vue?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+#                url: jdbc:mysql://localhost:3306/ry-vue?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+                url: jdbc:mysql://47.99.124.77:3306/ry-vue?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
                 username: root
-                password: password
-            # 从库数据源
+                password: hmh38324
+#                password: root
+            # 从库数据源  如果需要配置倒戈从数据库,参考slave来设置,同时要在DruidCOnfig中新注册一个Bean
             slave:
                 # 从数据源开关/默认关闭
                 enabled: false
@@ -43,8 +46,8 @@ spring:
                 allow:
                 url-pattern: /druid/*
                 # 控制台管理用户名和密码
-                login-username: ruoyi
-                login-password: 123456
+                login-username: admin
+                login-password: admin
             filter:
                 stat:
                     enabled: true

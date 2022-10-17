@@ -51,6 +51,7 @@ public class PermissionService
      *
      * @param permission 权限字符串
      * @return 用户是否不具备某权限
+     *
      */
     public boolean lacksPermi(String permission)
     {
@@ -62,6 +63,7 @@ public class PermissionService
      *
      * @param permissions 以 PERMISSION_NAMES_DELIMETER 为分隔符的权限列表
      * @return 用户是否具有以下任意一个权限
+     *      * "@ss.hasPermi('system:user:add,system:user:add')"    如果是多个权限用这个方法
      */
     public boolean hasAnyPermi(String permissions)
     {

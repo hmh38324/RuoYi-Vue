@@ -62,7 +62,7 @@ public class GlobalExceptionHandler
     /**
      * 拦截未知的运行时异常
      */
-    @ExceptionHandler(RuntimeException.class)
+    @ExceptionHandler(RuntimeException.class) //只要是继承了BaseException的自定义异常类（如果没有在GlobalExceptionHandler定义）都会在这里被捕获
     public AjaxResult handleRuntimeException(RuntimeException e, HttpServletRequest request)
     {
         String requestURI = request.getRequestURI();
@@ -95,7 +95,7 @@ public class GlobalExceptionHandler
     /**
      * 自定义验证异常
      */
-    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ExceptionHandler(MethodArgumentNotValidException.class)//捕获@valided注解验证失败抛出的异常
     public Object handleMethodArgumentNotValidException(MethodArgumentNotValidException e)
     {
         log.error(e.getMessage(), e);
@@ -111,4 +111,9 @@ public class GlobalExceptionHandler
     {
         return AjaxResult.error("演示模式，不允许操作");
     }
+
+    /**
+     * 之后有自己的exception后可以在这里添加注解,然后定义抛出异常的形式和操作
+     * 这样就不用try catch 直接throw自己定义的异常就可以
+     */
 }

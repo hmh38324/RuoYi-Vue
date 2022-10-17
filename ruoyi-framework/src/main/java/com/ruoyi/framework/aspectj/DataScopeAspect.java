@@ -137,7 +137,9 @@ public class DataScopeAspect
             Object params = joinPoint.getArgs()[0];
             if (StringUtils.isNotNull(params) && params instanceof BaseEntity)
             {
+                //数据权限是通过基类来实现的,所以要对某数据结构进项权限控制要继承基类(BaseEntity)
                 BaseEntity baseEntity = (BaseEntity) params;
+                //sqlString.substring(4)去除  " OR "
                 baseEntity.getParams().put(DATA_SCOPE, " AND (" + sqlString.substring(4) + ")");
             }
         }

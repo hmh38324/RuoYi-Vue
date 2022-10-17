@@ -12,6 +12,7 @@ import com.ruoyi.common.utils.StringUtils;
 
 /**
  * spring工具类 方便在非spring管理环境中获取bean
+ * (异步无法通过注解过的bean!!!!)
  * 
  * @author ruoyi
  */

@@ -43,6 +43,7 @@ public class SameUrlDataInterceptor extends RepeatSubmitInterceptor
         String nowParams = "";
         if (request instanceof RepeatedlyRequestWrapper)
         {
+            //将request复制为可以重复读取的流
             RepeatedlyRequestWrapper repeatedlyRequest = (RepeatedlyRequestWrapper) request;
             nowParams = HttpHelper.getBodyString(repeatedlyRequest);
         }

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.choose.mapper.SysStudentMapper">
+    
+    <resultMap type="SysStudent" id="SysStudentResult">
+        <result property="studentId"    column="student_id"    />
+        <result property="studentName"    column="student_name"    />
+        <result property="studentChoose"    column="student_choose"    />
+        <result property="studentChosen"    column="student_chosen"    />
+        <result property="studentComment"    column="student_comment"    />
+    </resultMap>
+
+    <sql id="selectSysStudentVo">
+        select student_id, student_name, student_choose, student_chosen, student_comment from sys_student
+    </sql>
+
+    <select id="selectSysStudentList" parameterType="SysStudent" resultMap="SysStudentResult">
+        <include refid="selectSysStudentVo"/>
+        <where>  
+            <if test="studentName != null  and studentName != ''"> and student_name like concat('%', #{studentName}, '%')</if>
+            <if test="studentChoose != null "> and student_choose = #{studentChoose}</if>
+            <if test="studentChosen != null "> and student_chosen = #{studentChosen}</if>
+            <if test="studentComment != null  and studentComment != ''"> and student_comment = #{studentComment}</if>
+        </where>
+    </select>
+    
+    <select id="selectSysStudentByStudentId" parameterType="Long" resultMap="SysStudentResult">
+        <include refid="selectSysStudentVo"/>
+        where student_id = #{studentId}
+    </select>
+        
+    <insert id="insertSysStudent" parameterType="SysStudent" useGeneratedKeys="true" keyProperty="studentId">
+        insert into sys_student
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="studentName != null">student_name,</if>
+            <if test="studentChoose != null">student_choose,</if>
+            <if test="studentChosen != null">student_chosen,</if>
+            <if test="studentComment != null">student_comment,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="studentName != null">#{studentName},</if>
+            <if test="studentChoose != null">#{studentChoose},</if>
+            <if test="studentChosen != null">#{studentChosen},</if>
+            <if test="studentComment != null">#{studentComment},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysStudent" parameterType="SysStudent">
+        update sys_student
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="studentName != null">student_name = #{studentName},</if>
+            <if test="studentChoose != null">student_choose = #{studentChoose},</if>
+            <if test="studentChosen != null">student_chosen = #{studentChosen},</if>
+            <if test="studentComment != null">student_comment = #{studentComment},</if>
+        </trim>
+        where student_id = #{studentId}
+    </update>
+
+    <delete id="deleteSysStudentByStudentId" parameterType="Long">
+        delete from sys_student where student_id = #{studentId}
+    </delete>
+
+    <delete id="deleteSysStudentByStudentIds" parameterType="String">
+        delete from sys_student where student_id in 
+        <foreach item="studentId" collection="array" open="(" separator="," close=")">
+            #{studentId}
+        </foreach>
+    </delete>
+</mapper>

@@ -42,7 +42,7 @@ public class SysConfigController extends BaseController
     @GetMapping("/list")
     public TableDataInfo list(SysConfig config)
     {
-        startPage();
+        startPage();//startPage()一定要放到想要分页查询的那一条语句上面,因为它只对她下面第一个执行的语句起分页的作用;
         List<SysConfig> list = configService.selectConfigList(config);
         return getDataTable(list);
     }
@@ -82,6 +82,8 @@ public class SysConfigController extends BaseController
     @PreAuthorize("@ss.hasPermi('system:config:add')")
     @Log(title = "参数管理", businessType = BusinessType.INSERT)
     @PostMapping
+    //方法参数中加入@Validated或者@Valid可以对参数字段进行验证
+    // (前提是参数的类字段要有相应的属性,如@NotNull,@Min,@Siz,@NotBlank等)
     public AjaxResult add(@Validated @RequestBody SysConfig config)
     {
         if (UserConstants.NOT_UNIQUE.equals(configService.checkConfigKeyUnique(config)))

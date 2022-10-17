@@ -62,13 +62,15 @@ spring:
   # redis 配置
   redis:
     # 地址
-    host: localhost
+    host: 47.99.124.77
+#    host: localhost
     # 端口，默认为6379
     port: 6379
     # 数据库索引
     database: 0
     # 密码
-    password: 
+    password: hmh38324
+#    password:
     # 连接超时时间
     timeout: 10s
     lettuce:
@@ -101,10 +103,11 @@ mybatis:
     configLocation: classpath:mybatis/mybatis-config.xml
 
 # PageHelper分页插件
-pagehelper: 
+pagehelper:
+  #配置不同数据库时,要删除helperDialect, 同时添加 autoRuntimeDialect: true
   helperDialect: mysql
   supportMethodsArguments: true
-  params: count=countSql 
+  params: count=countSql
 
 # Swagger配置
 swagger:
